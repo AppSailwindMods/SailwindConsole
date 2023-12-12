@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace SailwindConsole
@@ -169,13 +170,14 @@ namespace SailwindConsole
 
         internal static void HideConsole()
         {
-            consoleInput.DeactivateInputField();
+            EventSystem.current.SetSelectedGameObject(null);
             canvasGroup.alpha = 0;
         }
 
         internal static void ShowConsole()
         {
-            consoleInput.DeactivateInputField();
+            consoleInput.Select();
+            consoleInput.ActivateInputField();
             canvasGroup.alpha = 1;
         }
 

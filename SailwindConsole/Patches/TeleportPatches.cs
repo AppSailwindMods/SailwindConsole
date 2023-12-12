@@ -14,9 +14,14 @@ namespace SailwindConsole.Patches
         public static class Update
         {
             [HarmonyPrefix]
-            public static bool Prefix()
+            public static bool Prefix(Port __instance)
             {
-                return !Utilities.GamePaused;
+                if (!Utilities.GamePaused) return true;
+                if (__instance.teleportPlayer)
+                {
+                    FloatingOriginManager.ShiftingThisFrame = true;
+                }
+                return false;
             }
         }
     }
