@@ -1,0 +1,3 @@
+if not exist "F:\SteamLibrary\steamapps\common\Sailwind\BepInEx\plugins\SailwindConsole" mkdir "F:\SteamLibrary\steamapps\common\Sailwind\BepInEx\plugins\SailwindConsole"
+if not exist "F:\SteamLibrary\steamapps\common\Sailwind\BepInEx\plugins\SailwindConsole\assets" mkdir "F:\SteamLibrary\steamapps\common\Sailwind\BepInEx\plugins\SailwindConsole\assets"
+del /q "F:\SteamLibrary\steamapps\common\Sailwind\BepInEx\plugins\SailwindConsole\SailwindConsole.dll"
