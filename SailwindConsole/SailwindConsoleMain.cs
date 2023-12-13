@@ -14,7 +14,7 @@ namespace SailwindConsole
     {
         public const string GUID = "com.app24.sailwindconsole";
         public const string NAME = "Sailwind Console";
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.1";
 
         internal static ManualLogSource logSource;
 

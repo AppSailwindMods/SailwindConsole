@@ -16,13 +16,15 @@ namespace SailwindConsole.Commands
 
         public override void OnRun(List<string> args)
         {
-            if (Enum.TryParse(args[0], out PortRegion region))
+            int.TryParse(args[0], out var enumIndex);
+            if (enumIndex < (int)PortRegion.none)
             {
+                var enumValue = (PortRegion)enumIndex;
                 int.TryParse(args[1], out int reputation);
                 if (reputation >= 0)
                 {
-                    PlayerReputation.ChangeReputation(reputation, region);
-                    ModConsoleLog.Log($"Added {reputation} reputation to {region}");
+                    PlayerReputation.ChangeReputation(reputation, enumValue);
+                    ModConsoleLog.Log($"Added {reputation} reputation to {enumValue}");
                 }
                 else
                 {
