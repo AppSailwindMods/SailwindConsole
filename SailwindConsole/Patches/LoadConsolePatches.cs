@@ -1,6 +1,5 @@
 ﻿using Crest;
 using HarmonyLib;
-using SailwindModdingHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,29 @@ using UnityEngine;
 
 namespace SailwindConsole.Patches
 {
-    internal static class ConsolePatches
+    internal static class LoadConsolePatches
     {
+        internal static StartMenu startMenu;
+
+        [HarmonyPatch(typeof(Sun), "Start")]
+        private static class GameStartPatch
+        {
+            [HarmonyPostfix]
+            public static void Postfix(Sun __instance)
+            {
+                Utilities.playerTransform = Sun.sun.GetPrivateField<Transform>("player");
+            }
+        }
+
+        [HarmonyPatch(typeof(StartMenu), "Awake")]
+        private static class SetStartMenu
+        {
+            private static void Prefix(StartMenu __instance)
+            {
+                startMenu = __instance;
+            }
+        }
+
         [HarmonyPatch(typeof(StartMenu), "LateUpdate")]
         private static class LateUpdatePatch
         {
@@ -23,7 +43,7 @@ namespace SailwindConsole.Patches
                     ModConsole.ToggleConsole();
                 }
 
-                if(ModConsole.visibleConsole && ModConsole.inputFocused && Input.GetKeyDown(KeyCode.Return))
+                if (ModConsole.visibleConsole && ModConsole.inputFocused && Input.GetKeyDown(KeyCode.Return))
                 {
                     ModConsole.OnEndEdit();
                 }
@@ -36,6 +56,7 @@ namespace SailwindConsole.Patches
         {
             private static void Postfix(StartMenu __instance)
             {
+                Utilities.GamePaused = true;
                 if (ModConsole.visibleConsole)
                 {
                     ModConsole.ShowConsole();
@@ -48,7 +69,23 @@ namespace SailwindConsole.Patches
         {
             private static void Postfix(StartMenu __instance)
             {
-                    ModConsole.HideConsole();
+                ModConsole.HideConsole();
+                Utilities.GamePaused = false;
+            }
+        }
+
+        [HarmonyPatch(typeof(MouseButtonPointer), "DoRaycast")]
+        private static class BackgroundNotInteractablePatch
+        {
+            [HarmonyPrefix]
+            private static bool Prefix(MouseButtonPointer __instance)
+            {
+                if (ModConsole.visibleConsole && Utilities.GamePaused)
+                {
+                    __instance.SetPrivateField("pointedAtButton", null);
+                    return false;
+                }
+                return true;
             }
         }
 

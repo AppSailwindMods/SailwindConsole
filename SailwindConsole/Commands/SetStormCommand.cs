@@ -1,5 +1,4 @@
-﻿using SailwindModdingHelper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +14,9 @@ namespace SailwindConsole.Commands
 
         public override void OnRun(List<string> args)
         {
+            WeatherStorms.instance.FindClosestStorm();
             WeatherStorms.instance.GetCurrentStorm().transform.position = Utilities.PlayerTransform.position;
+            WeatherStorms.instance.ApplyStorm();
             ModConsoleLog.Log("Placed storm at player's location!");
         }
     }

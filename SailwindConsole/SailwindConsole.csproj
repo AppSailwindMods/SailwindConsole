@@ -94,14 +94,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>F:\SteamLibrary\steamapps\common\Sailwind\Sailwind_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
-    <Reference Include="SailwindModdingHelper">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>F:\SteamLibrary\steamapps\common\Sailwind\BepInEx\plugins\SailwindModdingHelper\SailwindModdingHelper.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="CommandHistoryChanger.cs" />
+    <Compile Include="Commands\ClearStormCommand.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Patches\LoadConsolePatches.cs" />
+    <Compile Include="ModConsole.cs" />
+    <Compile Include="Patches\TeleportPatches.cs" />
+    <Compile Include="SailwindConsoleMain.cs" />
+    <Compile Include="ModConsoleLog.cs" />
+    <Compile Include="GameData.cs" />
     <Compile Include="Commands\AddGoldCommand.cs" />
     <Compile Include="Commands\AddReputation.cs" />
     <Compile Include="Commands\CookFoodCommand.cs" />
@@ -127,14 +131,9 @@
     <Compile Include="Commands\ShowRegionsCommand.cs" />
     <Compile Include="Commands\TeleportCommand.cs" />
     <Compile Include="Commands\WorldCoordsCommand.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="GameData.cs" />
-    <Compile Include="SailwindConsoleMain.cs" />
-    <Compile Include="ModConsole.cs" />
-    <Compile Include="ModConsoleLog.cs" />
-    <Compile Include="Patches\ConsolePatches.cs" />
-    <Compile Include="Patches\TeleportPatches.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>call "$(ProjectDir)postBuild.bat"</PostBuildEvent>

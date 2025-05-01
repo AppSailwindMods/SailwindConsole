@@ -21,8 +21,7 @@ namespace SailwindConsole.Commands
             float.TryParse(args[0], out var speed);
             if (speed > 0)
             {
-                Time.timeScale = speed;
-                Time.fixedDeltaTime = speed * GameData.initialTimeStep;
+                LoadConsolePatches.startMenu.SetPrivateField("unpausedTimescale", speed);
             }
             else
             {

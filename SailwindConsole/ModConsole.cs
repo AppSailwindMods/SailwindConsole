@@ -1,15 +1,14 @@
-﻿using SailwindConsole.Commands;
-using SailwindModdingHelper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine;
+using SailwindConsole.Commands;
 
 namespace SailwindConsole
 {
@@ -48,6 +47,7 @@ namespace SailwindConsole
 
             var prefab = asset.LoadAsset<GameObject>("Console");
             modConsoleObject = GameObject.Instantiate(prefab);
+            asset.Unload(false);
             consoleCanvas = modConsoleObject.GetComponent<Canvas>();
 
             logText = modConsoleObject.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>();
@@ -103,6 +103,7 @@ namespace SailwindConsole
             AddCommand(new GodModeCommand());
             AddCommand(new GameSpeedCommand());
             AddCommand(new SetStormCommand());
+            AddCommand(new ClearStormCommand());
             AddCommand(new SetWindSpeedCommand());
             AddCommand(new CookFoodCommand());
             AddCommand(new SetWaveHeightCommand());
@@ -171,6 +172,8 @@ namespace SailwindConsole
         internal static void HideConsole()
         {
             EventSystem.current.SetSelectedGameObject(null);
+            /*consoleInput.SetPrivateField("m_AllowInput", false);
+            inputFocused = consoleInput.isFocused;*/
             canvasGroup.alpha = 0;
         }
 

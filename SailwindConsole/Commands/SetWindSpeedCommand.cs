@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-using SailwindModdingHelper;
 
 namespace SailwindConsole.Commands
 {
@@ -28,7 +27,7 @@ namespace SailwindConsole.Commands
 
         public override void OnRun(List<string> args)
         {
-            if(!windSpeeds.TryGetValue(args[0].ToLower(), out int windSpeed))
+            if (!windSpeeds.TryGetValue(args[0].ToLower(), out int windSpeed))
             {
                 ModConsoleLog.Error("Not a valid wind predefined value!");
             }
